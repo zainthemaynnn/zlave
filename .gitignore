@@ -3,5 +3,5 @@ data/App_data.db
 data/keywords.json
 *.log
 config/controls.yml
-resources/
+resources/*/*
 !resources/*/.gitignore
