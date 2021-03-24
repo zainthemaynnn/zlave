@@ -1,0 +1,50 @@
+---
+tokens: ~
+permissions:
+  premium:
+    - 339417775132901378
+data:
+  database: "data\\App_Data.db"
+  autores:
+    path: "data\\keywords.json"
+    res_types:
+      simple: simple text message
+      insert: pings and formats keyword into {} brackets
+      media: audios, images, videos
+  loggers:
+    logfile: "data\\zlave.log"
+    loglevel: DEBUG
+    format: "%(asctime)s %(name)s %(levelname)s: %(message)s"
+  funnypts:
+    reason_length: 280
+  ext_folders:
+    audios:
+      - .mp3
+      - .wav
+      - .ogg
+      - .flac
+      - .mid
+    images:
+      - .jpg
+      - .png
+      - .gif
+      - .svg
+      - .webp
+      - .bmp
+      - .ico
+    videos:
+      - .mp4
+      - .mov
+      - .webm
+music:
+  playlist_length: 69
+  volume: 0.5
+  timeout: 120.0
+  looptime: 1.0
+  url: https://youtube.com/playlist?list=PLBnWxeYR1i8efqPYOULt3UTC47xopMeiY
+style:
+  embeds:
+    color: 0xc500ff
+    length: 10
+  status: w00t w00t w00t
+network: ~
