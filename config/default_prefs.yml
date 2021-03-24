@@ -1,0 +1,7 @@
+---
+guilds:
+  prefix:
+    default: B)
+    max_length: 8
+  auto_response:
+    default: 1 # 1 means True, 0 means False
