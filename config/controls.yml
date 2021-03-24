@@ -1,7 +1,7 @@
 ---
 tokens: ~
 permissions:
-  premium:
+  premium: # ids of your friends go here
     - 339417775132901378
 data:
   database: "data\\App_Data.db"
@@ -41,7 +41,6 @@ music:
   volume: 0.5
   timeout: 120.0
   looptime: 1.0
-  url: https://youtube.com/playlist?list=PLBnWxeYR1i8efqPYOULt3UTC47xopMeiY
 style:
   embeds:
     color: 0xc500ff
