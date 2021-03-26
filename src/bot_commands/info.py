@@ -1,15 +1,9 @@
-# default
-import os
-
 # external
 import discord
 import yaml
 
 # self-made
 from tools import commands, utils
-
-# initialization
-PATH = os.environ["PYTHONPATH"]
 
 
 # functions
@@ -28,8 +22,9 @@ def gimme_info_pages(client):
     pagenum += 1
     embed = discord.Embed(title="client info", description="page {0} of {1}".format(
         pagenum, pagecount), color=0xc500ff)
-    embed.add_field(name="bot operator", value=client.get_user(
-        int(os.environ["zlave_owner"])), inline=False)
+    with open("config\\secrets.yml") as file:
+        embed.add_field(name="bot operator", value=client.get_user(
+            yaml.safe_load(file)["permissions"]["owner"]), inline=False)
     embed.add_field(name="invite me", value=discord.utils.oauth_url(
         client.user.id, discord.Permissions().general()), inline=False)
     embed.add_field(name="disclaimer", value="the invite above gives general privileges by default. know that some commands will only work with certain administration privileges.", inline=False)
