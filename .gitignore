@@ -1,8 +1,8 @@
 env/
+__pycache__/
 data/App_data.db
 data/keywords.json
 *.log
 resources/*/*
 # to keep empty resource folders
 !resources/*/.gitignore
-**/__pycache__/
