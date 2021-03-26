@@ -1,9 +1,12 @@
 # default
-import os
 from functools import wraps
 
 # external
 import yaml
+
+# initialization
+with open("config\\secrets.yml") as file:
+    permissions = yaml.safe_load(file)["permissions"]
 
 
 # restrictions
@@ -14,11 +17,10 @@ def operator_only(func):
 
     @wraps(func)
     async def wrapper(message, *args, **kwargs):
-        if message.author.id == int(os.environ["zlave_owner"]):
+        if message.author.id == permissions["owner"]:
             await func(message, *args, **kwargs)
         else:
             await message.channel.send("ONLY MY BOSS CAN USE THIS COMMAND, PEASANT")
-        return
     return wrapper
 
 
@@ -29,12 +31,10 @@ def premium_only(func):
 
     @wraps(func)
     async def wrapper(message, *args, **kwargs):
-        with open("config\\controls.yml") as controls_file:
-            if message.author.id in yaml.safe_load(controls_file)["permissions"]["premium"] or message.author.id == int(os.environ["zlave_owner"]):
-                await func(message, *args, **kwargs)
-            else:
-                await message.channel.send("YOU MUST ASK MY MASTER FOR ACCESS TO THIS COMMAND LOL GOOD LUCK")
-        return
+        if message.author.id in permissions["premium"] or message.author.id == permissions["owner"]:
+            await func(message, *args, **kwargs)
+        else:
+            await message.channel.send("YOU MUST ASK MY MASTER FOR ACCESS TO THIS COMMAND LOL GOOD LUCK")
     return wrapper
 
 
@@ -49,7 +49,6 @@ def admin_only(func):
             await func(message, *args, **kwargs)
         else:
             await message.channel.send("YOU ARE NOT AN ADMIN. WHO NEEDS RIGHTS ANYWAYS")
-        return
     return wrapper
 
 
@@ -64,7 +63,6 @@ def voice_only(func):
             await func(message, *args, **kwargs)
         else:
             await message.channel.send("I CANNOT PLAY ANYTHING IF YOU ARE NOT IN A VOICE CHANNEL, PLEASE USE YOUR HEAD SIR AND/OR MA'AM")
-        return
     return wrapper
 
 
@@ -75,7 +73,7 @@ class Command:
     commands are chained into subcommands separated by spaces
     """
 
-    def __init__(self, func, category="UNLISTED"):
+    def __init__(self, func, subcommands={}, category=None):
         def prepare(func):
             """
             allows chaining of subcommands
@@ -91,12 +89,9 @@ class Command:
             return wrapper
 
         self.run = prepare(func)
+        self.subcommands = subcommands
         self.description = func.__doc__
-        self.subcommands = {}
         self.category = category
-
-    def add_subcommands(self, subcommands):
-        self.subcommands.update(subcommands)
 
     def get_subcommands(self):
         return self.subcommands

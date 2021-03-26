@@ -1,6 +1,5 @@
 # default
 import urllib.request
-import asyncio
 
 # external
 import yaml
@@ -11,8 +10,8 @@ from youtube_dl.utils import DownloadError
 from tools import commands, logger_tools, utils
 
 # initialization
-with open("config\\controls.yml") as controls_file:
-    music_controls = yaml.safe_load(controls_file)["music"]
+with open("config\\controls.yml") as file:
+    music_controls = yaml.safe_load(file)["music"]
 logger = logger_tools.standard_logger()
 
 
@@ -35,8 +34,8 @@ async def get_playlist(message, client):
     """
     gets playlist for guild
     """
-    playlist = client.find_playlist(message.guild.id)
-    if not playlist:
+
+    if not (playlist := client.find_playlist(message.guild.id)):
         await message.channel.send("THERE IS NOTHING PLAYING")
     return playlist
 
@@ -168,7 +167,7 @@ async def move_to(message, client, extra_args):
     if not playlist:
         return
 
-    if extra_args and extra_args[0].isnumeric():
+    if extra_args and extra_args[0].isdigit():
         track_number = int(extra_args[0]) - 1
         if 0 <= track_number < len(playlist.get_queue()):
             playlist.set_track_number(track_number)
@@ -220,7 +219,7 @@ async def queue(message, client, extra_args):
             utils.to_minutes(track["duration"]), track["uploader"]), inline=False)
 
     page = 0
-    if extra_args and extra_args[0].isnumeric():
+    if extra_args and extra_args[0].isdigit():
         page = extra_args[0]
 
     title = "TRACKLIST" if not playlist.is_looping() else "TRACKLIST (LOOPING)"
@@ -238,7 +237,7 @@ async def remove(message, client, extra_args):
         return
 
     track_number = playlist.get_track_number()
-    if extra_args and extra_args[0].isnumeric():
+    if extra_args and extra_args[0].isdigit():
         track_number = int(extra_args[0]) - 1
 
     if playlist.remove(track_number):
@@ -273,7 +272,7 @@ async def skip(message, client, extra_args):
         return
 
     skip_count = 1
-    if extra_args and extra_args[0].isnumeric():
+    if extra_args and extra_args[0].isdigit():
         skip_count = int(extra_args[0])
 
     playlist.set_track_number(playlist.get_track_number() + skip_count)
@@ -293,15 +292,13 @@ async def stop(message, client, extra_args):
     playlist.deactivate()
 
 
-response = commands.Command(player, category="voice")
-player_subcommands = {
-    "skip": commands.Command(skip),
-    "loop": commands.Command(loop),
+response = commands.Command(player, {
     "queue": commands.Command(queue),
-    "pause": commands.Command(pause),
-    "resume": commands.Command(resume),
+    "loop": commands.Command(loop),
+    "skip": commands.Command(skip),
     "moveto": commands.Command(move_to),
     "remove": commands.Command(remove),
+    "pause": commands.Command(pause),
+    "resume": commands.Command(resume),
     "stop": commands.Command(stop)
-}
-response.add_subcommands(player_subcommands)
+}, category="voice")

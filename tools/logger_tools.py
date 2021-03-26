@@ -6,8 +6,8 @@ import inspect
 import yaml
 
 # initialization
-with open("config\\controls.yml") as controls_file:
-    log_controls = yaml.safe_load(controls_file)["data"]["loggers"]
+with open("config\\controls.yml") as file:
+    log_controls = yaml.safe_load(file)["data"]["loggers"]
 
 
 # functions

@@ -3,6 +3,7 @@ __pycache__/
 data/App_data.db
 data/keywords.json
 *.log
+# empty resource folders without the actual media
 resources/*/*
-# to keep empty resource folders
 !resources/*/.gitignore
+config/secrets.yml

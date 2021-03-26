@@ -7,8 +7,8 @@ import yaml
 # self-made
 from tools import commands, database, utils
 
-with open("config\\controls.yml") as controls_file:
-    controls = yaml.safe_load(controls_file)
+with open("config\\controls.yml") as file:
+    controls = yaml.safe_load(file)
     db = controls["data"]["database"]
     funny_controls = controls["data"]["funnypts"]
 
@@ -78,7 +78,7 @@ async def add(message, client, extra_args):
         await message.channel.send("FUNNYPOINT ADDED. CONGRATULATIONS, COMEDY HAS BEEN ACHIEVED")
 
 
-async def lb(message, client, extra_args):
+async def leaderboard(message, client, extra_args):
     """
     displays who the user thinks is the funniest, yourself by default
     """
@@ -173,11 +173,9 @@ async def remove(message, client, extra_args):
         await message.channel.send("BRUH, THAT WAS CRINGE. SOMEONE JUST REVOKED YOUR FUNNYPOINT")
 
 
-response = commands.Command(funnypts, "games")
-funnypts_subcommands = {
+response = commands.Command(funnypts, {
     "add": commands.Command(add),
     "remove": commands.Command(remove),
     "history": commands.Command(history),
-    "lb": commands.Command(lb)
-}
-response.add_subcommands(funnypts_subcommands)
+    "lb": commands.Command(leaderboard)
+}, "games")

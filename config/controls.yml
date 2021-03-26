@@ -1,10 +1,7 @@
 ---
-tokens: ~
-permissions:
-  premium: # ids of your friends go here
-    - 339417775132901378
 data:
-  database: "data\\App_Data.db"
+  database:
+    path: "data\\App_Data.db"
   autores:
     path: "data\\keywords.json"
     res_types:

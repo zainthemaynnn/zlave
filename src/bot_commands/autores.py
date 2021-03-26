@@ -10,8 +10,8 @@ import yaml
 
 # self-made
 from tools import commands, utils
-with open("config\\controls.yml") as controls_file:
-    controls = yaml.safe_load(controls_file)
+with open("config\\controls.yml") as file:
+    controls = yaml.safe_load(file)
     ext_folders = controls["data"]["ext_folders"]
     autores_controls = controls["data"]["autores"]
     json_path = autores_controls["path"]
@@ -239,7 +239,7 @@ async def view_res(message, client, extra_args):
     """
 
     page = 0
-    if extra_args and extra_args[0].isnumeric():
+    if extra_args and extra_args[0].isdigit():
         page = extra_args[0]
 
     with open(json_path) as json_file:
@@ -265,7 +265,7 @@ async def view_keys(message, client, extra_args):
     """
 
     page = 0
-    if extra_args and extra_args[0].isnumeric():
+    if extra_args and extra_args[0].isdigit():
         page = extra_args[0]
 
     with open(json_path) as json_file:
@@ -350,22 +350,20 @@ async def delkeys(message, client, extra_args):
 @commands.premium_only
 async def sauce(message, client, extra_args):
     """
-    sends the actual json file
+    sends the raw responses file
     """
 
     await message.channel.send(file=discord.File(json_path))
 
 
-response = commands.Command(auto_res, category="special")
-response_subcommands = {
+response = commands.Command(auto_res, {
     "newres": commands.Command(newres),
     "kw2res": commands.Command(keys_to_res),
     "res2kw": commands.Command(res_to_key),
+    "delres": commands.Command(delres),
+    "delkey": commands.Command(delkeys),
     "viewres": commands.Command(view_res),
     "viewkw": commands.Command(view_keys),
-    "delres": commands.Command(delres),
-    "delkw": commands.Command(delkeys),
-    "rtypes": commands.Command(gimme_restypes),
+    "restypes": commands.Command(gimme_restypes),
     "sauce": commands.Command(sauce)
-}
-response.add_subcommands(response_subcommands)
+}, category="special")

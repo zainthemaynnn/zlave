@@ -9,8 +9,8 @@ import yaml
 from tools.utils import to_minutes
 
 # initialization
-with open("config\\controls.yml") as controls_file:
-    music_controls = yaml.safe_load(controls_file)["music"]
+with open("config\\controls.yml") as file:
+    music_controls = yaml.safe_load(file)["music"]
 
 
 class Playlist:

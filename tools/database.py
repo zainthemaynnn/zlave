@@ -13,8 +13,8 @@ from tools import logger_tools
 logger = logger_tools.standard_logger("INFO")
 
 # intitialization
-with open("config\\controls.yml") as controls_file:
-    data_controls = yaml.safe_load(controls_file)["data"]
+with open("config\\controls.yml") as file:
+    data_controls = yaml.safe_load(file)["data"]
 
 
 # functions
@@ -41,7 +41,7 @@ def query(func):
     def wrapper(*args, **kwargs):
         try:
             db = "{0}\\{1}".format(
-                os.environ["PYTHONPATH"], data_controls["database"])
+                os.environ["PYTHONPATH"], data_controls["database"]["path"])
             conn = sqlite3.connect(db)
             logger.debug(f"successfully opened database {db}")
         except Exception as e:
