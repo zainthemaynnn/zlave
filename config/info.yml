@@ -2,8 +2,8 @@
 general:
   author: am c00l pl0x#7196
   creation_date: 2/28/2021
-  version: "1.4"
-  notes: automatic responses have been completely reworked. now, theoretically, I could allow anyone to add whatever they want easily. not that I will.
-  source_code: lol
+  version: "1.5"
+  notes: whoever reads this just lost the game
+  source_code: https://github.com/zainthemaynnn/zlave
 
 client: ~ # all generated in info.py

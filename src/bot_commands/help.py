@@ -18,7 +18,7 @@ def populate(embed, command, entry_number):
 
     field_name = f"`{command[0]}`"
     category = command[1].category
-    if category != "UNLISTED":
+    if category:
         field_name += f" - {category}"
     embed.add_field(name=field_name,
                     value=command[1].description, inline=False)
@@ -42,7 +42,7 @@ async def cmdhelp(message, client, extra_args, command=None):
     if extra_args:
         arg0 = extra_args[0]
         # if page number given
-        if arg0.isnumeric():
+        if arg0.isdigit():
             page = arg0
         # if specified
         elif arg0 in cmdlist:

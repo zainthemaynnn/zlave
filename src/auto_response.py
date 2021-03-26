@@ -12,8 +12,8 @@ from tools import logger_tools
 
 # initialization
 logger = logger_tools.standard_logger()
-with open("config\\controls.yml") as controls_file:
-    autores_controls = yaml.safe_load(controls_file)["data"]["autores"]
+with open("config\\controls.yml") as file:
+    autores_controls = yaml.safe_load(file)["data"]["autores"]
 
 
 # functions
@@ -22,13 +22,11 @@ def search(words):
     matches the first keyword to an array of words, if so returns the appropriate response(s) else None
     """
 
-    with open(autores_controls["path"]) as responses_file:
-        passive_responses = json.load(responses_file)
+    with open(autores_controls["path"]) as file:
+        passive_responses = json.load(file)
         for word in words:
             # stripping word boundaries. for commands it needs to be specific so word boundaries are not stripped.
-            word = word.casefold()
-            match = re.search(r"\b(.+)\b", word)
-            if match:
+            if match := re.search(r"\b(.+)\b", word.casefold()):
                 word = match.group(1)
             else:
                 # it's not a word; continue
@@ -62,4 +60,4 @@ async def sauce_msg(response_obj, keyword, message):
     elif ctype == "media":
         await message.channel.send(file=discord.File(content))
     else:
-        logger.error(f"undefined ctype detected: {ctype}")
+        logger.error(f"undefined content type detected: {ctype}")

@@ -113,9 +113,7 @@ async def autores(message, client, extra_args):
     await message.channel.send(f"AUTOMATIC RESPONSES HAVE BEEN `{pref}`")
 
 
-guildprefs_subcommands = {
-    "prefix": commands.Command(prefix),
-    "autores": commands.Command(autores)
-}
-response = commands.Command(guildprefs, category="configuration")
-response.add_subcommands(guildprefs_subcommands)
+response = commands.Command(guildprefs, {
+    "prefix": commands.Command("prefix"),
+    "autores": commands.Command("autores")
+}, category="configuration")

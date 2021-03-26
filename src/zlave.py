@@ -12,8 +12,8 @@ import auto_response
 
 # initialization
 logger = logger_tools.standard_logger("INFO")
-with open("config\\controls.yml") as controls_file:
-    controls = yaml.safe_load(controls_file)
+with open("config\\controls.yml") as file:
+    controls = yaml.safe_load(file)
 ROOT = os.environ["PYTHONPATH"]
 
 # bot stuff
@@ -151,7 +151,8 @@ async def on_message(message):
 
 # start bot
 try:
-    client.run(os.environ["zlave_token"])
+    with open("config\\secrets.yml") as file:
+        client.run(yaml.safe_load(file)["tokens"]["discord"])
 except Exception as e:
     logger.critical(
         f"client couldn't start lmao; {e}")

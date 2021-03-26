@@ -13,8 +13,8 @@ from tools import logger_tools
 
 # initialization
 logger = logger_tools.standard_logger()
-with open("config\\controls.yml") as controls_file:
-    style_controls = yaml.safe_load(controls_file)["style"]
+with open("config\\controls.yml") as file:
+    style_controls = yaml.safe_load(file)["style"]
 
 
 # functions
