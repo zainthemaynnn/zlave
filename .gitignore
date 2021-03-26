@@ -1,9 +1,12 @@
+# useless stuff
 env/
 __pycache__/
-data/App_data.db
-data/keywords.json
-*.log
-# empty resource folders without the actual media
+
+# data nobody wants
 resources/*/*
-!resources/*/.gitignore
+data/
+**.log
 config/secrets.yml
+
+# .gitignores to keep directories alive
+!resources/*/.gitignore
