@@ -94,7 +94,6 @@ class Playlist:
                     break
                 else:
                     time_alone += looptime
-                
 
             # changed externally
             if self.play_next:
