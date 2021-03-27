@@ -140,14 +140,14 @@ async def on_message(message):
                 await auto_response.sauce_msg(response, keyword, message)
             return
 
-    # ponged
-    else:
-        str_id = str(client.user.id)
-        if words[0] in (f"<@{str_id}>", f"<@!{str_id}>"):
-            if len(words) == 1:
-                await message.channel.send("WHAT'S UP. MY CURRENT PREFIX IS `{0}` FOLLOWED BY A SPACE. TRY `{0} help`".format(cmd_prefix))
-            else:
-                await message.channel.send("SCREW OFF")
+        # ponged
+        else:
+            str_id = str(client.user.id)
+            if words[0] in (f"<@{str_id}>", f"<@!{str_id}>"):
+                if len(words) == 1:
+                    await message.channel.send("WHAT'S UP. MY CURRENT PREFIX IS `{0}` FOLLOWED BY A SPACE. TRY `{0} help`".format(cmd_prefix))
+                else:
+                    await message.channel.send("SCREW OFF")
 
 # start bot
 try:
