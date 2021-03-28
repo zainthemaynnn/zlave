@@ -10,3 +10,4 @@ config/secrets.yml
 
 # .gitignores to keep directories alive
 !resources/*/.gitignore
+!data/.gitignore
