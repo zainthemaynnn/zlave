@@ -4,10 +4,10 @@ __pycache__/
 
 # data nobody wants
 resources/*/*
-data/
+data/*
 **.log
 config/secrets.yml
 
-# .gitignores to keep directories alive
+# to keep directories alive (these start empty)
 !resources/*/.gitignore
 !data/.gitignore
