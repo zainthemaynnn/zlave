@@ -137,7 +137,7 @@ def paginated_embeds(populator):
             for entry in entries[startindex:]:
                 populator(embed, entry, entry_number)
                 entry_number += 1
-                # when the entry count reaches 5 a new page is added
+                # when the entry count reaches page length a new page is added
                 if len(embed.fields) == page_length:
                     page_embeds.append(embed)
                     create_pages(startindex + page_length, entry_number)
