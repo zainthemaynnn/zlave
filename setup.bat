@@ -7,8 +7,9 @@ py -3 -m pip install -U discord.py
 py -3 -m pip install -U PyYAML
 py -3 -m pip install -U youtube_dl
 
-if not exist data\App_Data.db (sqlite3.exe data\App_Data.db < templates\schema.sql)
-if not exist data\keywords.json (type templates\keywords.json >> data\keywords.json)
+if not exist data\App_Data.db (sqlite3.exe data\App_Data.db < install\schema.sql)
+if not exist data\keywords.json (type install\keywords.json >> data\keywords.json)
+if not exist data\zlave.log (type NUL > data\zlave.log)
 
 echo/ & echo welcome to the extremely janky and halfhearted zlave setup wizard
 echo a virtual environment and some packages have already been installed

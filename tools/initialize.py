@@ -4,7 +4,7 @@
 
 import yaml
 
-with open("templates\\secrets.yml") as file:
+with open("install\\secrets.yml") as file:
     secrets = yaml.safe_load(file)
 
 with open("config\\secrets.yml", "w") as file:
