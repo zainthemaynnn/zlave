@@ -78,6 +78,15 @@ async def add(message, client, extra_args):
         await message.channel.send("FUNNYPOINT ADDED. CONGRATULATIONS, COMEDY HAS BEEN ACHIEVED")
 
 
+async def remove(message, client, extra_args):
+    """
+    removes a point of funny
+    """
+
+    if await funnypts_transaction(message, client, extra_args, "remove"):
+        await message.channel.send("BRUH, THAT WAS CRINGE. SOMEONE JUST REVOKED YOUR FUNNYPOINT")
+
+
 async def leaderboard(message, client, extra_args):
     """
     displays who the user thinks is the funniest, yourself by default
@@ -162,15 +171,6 @@ async def history(message, client, extra_args):
     title = f"{client.get_user(user_id).name}'s FUNNYPOINT HISTORY"
     embeds = populate(title, transactions, page_length=5)
     await utils.sauce_pages(embeds, message, client)
-
-
-async def remove(message, client, extra_args):
-    """
-    removes a point of funny
-    """
-
-    if await funnypts_transaction(message, client, extra_args, "remove"):
-        await message.channel.send("BRUH, THAT WAS CRINGE. SOMEONE JUST REVOKED YOUR FUNNYPOINT")
 
 
 response = commands.Command(funnypts, {
